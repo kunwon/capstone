@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+	<title>Restaurant Recommendations</title>
+</head>
+
+<ul>
+	<li><a href="form">Home</a></li>
+</ul>
+
+<body>
+<h2>Recommendations:</h2>
+{{output_table|safe}}
+
+<h3>Based on the following inputs:</h3>
+{{input_table|safe}}
+</body>
+</html>

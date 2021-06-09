@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+	<title>Kun Won's Similar Restaurant Recommendation System!</title>
+</head>
+<body>
+
+<ul>
+  <li><a href="form">Home</a></li>
+</ul>
+
+<h1>Kun Won's Similar Restaurant Recommender System!</h1>
+
+<h2>Simple Restaurant Recommender</H2>
+<h4>Recommend based on a single restaurant</h4>
+
+	<form action="/searchid">
+		<p>
+			<label for="resname">Restaurant Name</label><br>
+			<input type="text" name="resname">
+		</p>
+		<p><button type="submit">Search</button></p>
+	</form>
+
+<h2>Advanced Restaurant Recommender</h2>
+<h4>Recommend by inputting multiple restaurants IDs and filtering by location</h4>
+	<form action="/recommend">
+		<p>
+			<label for="placeid1">Restaurant ID 1</label><br>
+			<input type="text" name="placeid1", style="width:250px;", maxlength=27, minlength=27, placeholder='Fill Here', pattern='ChIJ[\S]+'>
+		</p>
+		<p>
+			<label for="placeid2">Restaurant ID 2</label><br>
+			<input type="text" name="placeid2", style="width:250px;", maxlength=27, minlength=27, placeholder='Optional', pattern='ChIJ[\S]+'>
+		</p>		
+		<p>
+			<label for="placeid3">Restaurant ID 3</label><br>
+			<input type="text" name="placeid3", style="width:250px;", maxlength=27, minlength=27, placeholder='Optional', pattern='ChIJ[\S]+'>
+		</p>
+		<p>
+			<label for="location">Location</label><br>
+			<select id="Location" name="location">
+				<option value="28">All Areas</option>
+				<option value="22">Ang Mo Kio</option>
+				<option value="13">Bedok</option>
+				<option value="3">Bishan</option>
+				<option value="21">Bukit Batok</option>
+				<option value="24">Bukit Timah</option>
+				<option value="4">Changi Airport</option>
+				<option value="8">Choa Chu Kang</option>
+				<option value="16">City Hall</option>
+				<option value="2">Clementi</option>
+				<option value="27">Expo</option>
+				<option value="20">Harbourfront</option>
+				<option value="14">Jurong East</option>
+				<option value="6">Jurong West</option>
+				<option value="11">Orchard</option>
+				<option value="12">Pasir Ris</option>
+				<option value="17">Pasir Ris Park</option>
+				<option value="1">Paya Lebar</option>
+				<option value="7">Punggol</option>
+				<option value="23">Queenstown</option>
+				<option value="5">Redhill</option>
+				<option value="19">Sembawang</option>
+				<option value="15">Serangoon</option>
+				<option value="25">Tampines</option>
+				<option value="18">Tanjong Pagar</option>
+				<option value="26">Toa Payoh</option>
+				<option value="10">Tuas</option>
+				<option value="0">Woodlands</option>
+				<option value="9">Yishun</option>
+
+					
+			</select>						
+		</p>
+		<p><button type="submit">Recommend!</button></p>
+	</form>
+</body>
+</html>
