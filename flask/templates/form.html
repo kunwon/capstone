@@ -3,29 +3,37 @@
 
 <head>
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
-	<title>Kun Won's Similar Restaurant Recommendation System!</title>
+	<title>Kun Won's Similar Singapore Restaurant Recommender System</title>
 </head>
+
+<!-- <header class="intro-header" style="background-image: url({{ url_for('static', filename='wallpaper.jpg') }})"> -->
+
 <body>
 
+
+
 <ul>
-  <li><a href="form">Home</a></li>
+  <li><a href="/">Home</a></li>
 </ul>
 
-<h1>Kun Won's Similar Restaurant Recommender System!</h1>
+<h1>Kun Won's HangryGoWhere 2.0</h1>
+
+<div style="width: 50%; float: right;">
+	<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kunwon.github.io/plotly_map/" height="525" width="100%"></iframe>
+	</div>
 
 <h2>Simple Restaurant Recommender</H2>
 <h4>Recommend based on a single restaurant</h4>
-
+Search for a restaurant you like (look at the map)!
 	<form action="/searchid">
 		<p>
 			<label for="resname">Restaurant Name</label><br>
 			<input type="text" name="resname">
 		</p>
 		<p><button type="submit">Search</button></p>
-	</form>
-
+	</form>	
 <h2>Advanced Restaurant Recommender</h2>
-<h4>Recommend by inputting multiple restaurants IDs and filtering by location</h4>
+<h4>Recommend by inputting multiple restaurants IDs (copy from search page) and filtering by location</h4>
 	<form action="/recommend">
 		<p>
 			<label for="placeid1">Restaurant ID 1</label><br>
@@ -77,5 +85,6 @@
 		</p>
 		<p><button type="submit">Recommend!</button></p>
 	</form>
+
 </body>
 </html>

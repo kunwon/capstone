@@ -2,3 +2,4 @@ data/
 flask/assets/
 flask/__pycache__/
 reference/
+.DS_Store

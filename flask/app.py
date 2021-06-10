@@ -12,7 +12,7 @@ def add_header(response):
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
 
-@app.route('/form')
+@app.route('/')
 def form():
     return render_template('form.html')
 
@@ -26,8 +26,9 @@ def get_id():
     output = res[res['title'].str.contains(name, case=False)][['title', 'placeid', 'address']].head(75).reset_index(drop=True)
     output['Recommend Similar Restaurants'] = output['placeid'].apply(lambda x: '<a href="./recommend?placeid1={0}&placeid2=&placeid3=&location=28">Find!</a>'.format(x))
     output.rename({'title': 'Restaurant Name', 'placeid': 'ID', 'address':'Address'}, axis=1, inplace=True)
+    searchno = len(output)
     output_table = output.to_html(escape=False, justify='left', index=False)
-    return render_template('search.html', output_table=output_table, name=name)
+    return render_template('search.html', output_table=output_table, name=name, searchno=searchno)
 
 def recommend(placeids, cluster='NA', cosine_sim=cosine_sim):
     placeids = [res[res['placeid'] == i].index[0] for i in placeids if i]
@@ -42,7 +43,10 @@ def recommend(placeids, cluster='NA', cosine_sim=cosine_sim):
             cosine_sim_series += pd.Series(cosine_sim[i])
         cosine_sim_series = cosine_sim_series/len(placeids)
         cos_series = pd.Series(cosine_sim_series).sort_values(ascending=False)
-        top_50_indexes = list(cos_series.iloc[len(placeids):31].index)
+        length = 31
+        if cluster!=28: 
+            length = 51
+        top_50_indexes = list(cos_series.iloc[len(placeids):length].index)
         df = res.iloc[top_50_indexes, :].sort_values(['score', 'reviewsno'], ascending=False)
         if cluster!=28:
             df = df[df['cluster']==cluster]
@@ -68,9 +72,10 @@ def make_recommendation():
     cluster = int(user_input['location'])
     placeids.extend([placeid1, placeid2, placeid3])
     input, output = recommend(placeids=placeids, cluster=cluster)
+    recommendno = len(output)
     output_table = output.reset_index(drop=True).to_html(escape=False, justify='left', index=False)
     input_table = input.reset_index(drop=True).to_html(escape=False, justify='left', index=False)
-    return render_template('results.html', output_table=output_table, input_table=input_table)
+    return render_template('results.html', output_table=output_table, input_table=input_table, recommendno=recommendno)
 
 # Call app.run(debug=True) when python script is called
 if __name__ == '__main__':
